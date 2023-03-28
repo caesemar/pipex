@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caesemar <caesemar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:44:23 by jocasado          #+#    #+#             */
-/*   Updated: 2023/03/27 20:05:05 by caesemar         ###   ########.fr       */
+/*   Updated: 2023/03/28 20:45:18 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,13 @@
 int	main(int argc, char **argv, char **envp)
 {
 	t_pipex	pipex;
-	int		c_f1;
 
 	if (argc != 5)
 		ft_argcerror();
-	if (access(argv[1], F_OK | R_OK) != 0)
+	if (access(argv[1], R_OK) != 0)
 		ft_error_infile(argv[4]);
 	pipex.fd_out = open (argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
-	if (access(argv[4], F_OK | W_OK) != 0)
+	if (access(argv[4], W_OK) != 0)
 		ft_serror();
 	pipex.fd_in = open (argv[1], O_RDONLY);
 	if (pipex.fd_in < 0 || pipex.fd_out < 0)
@@ -34,12 +33,11 @@ int	main(int argc, char **argv, char **envp)
 	pipex.path = comm_path(envp);
 	pipex.cmd_path = ft_split(pipex.path, ':');
 	pipex.cmd_fpath1 = cmd_found(&pipex, argv[2]);
-	pipex.cmd_fpath2 = cmd_found(&pipex, argv[3]);
 	if (pipe(pipex.pipe) < 0)
 		ft_serror();
-	pipex.pid2 = fork();
-	child(&pipex);
+	first_child(&pipex);
+	close(pipex.pipe[0]);
+	close(pipex.pipe[1]);
+	full_free(&pipex);
 	return (0);
 }
-
-

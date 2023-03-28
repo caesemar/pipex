@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_cmd_find.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caesemar <caesemar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 16:32:08 by jocasado          #+#    #+#             */
-/*   Updated: 2023/03/27 15:40:06 by caesemar         ###   ########.fr       */
+/*   Updated: 2023/03/28 20:45:15 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ char	*cmd_found(t_pipex *pipex, char *cmd)
 	}
 	else
 		return (cmd_path_finder(pipex, cmd));
-	return (NULL);
 }
 
 char	*cmd_path_finder(t_pipex *pipex, char *cmd)
@@ -40,6 +39,8 @@ char	*cmd_path_finder(t_pipex *pipex, char *cmd)
 	char	*f_path;
 	char	*temp;
 
+	if (pipex->cmd_args != NULL)
+		free (pipex->cmd_args);
 	pipex->cmd_args = ft_split(cmd, ' ');
 	while (pipex->cmd_path)
 	{
@@ -53,8 +54,7 @@ char	*cmd_path_finder(t_pipex *pipex, char *cmd)
 	}
 	ft_free2d(pipex->cmd_args);
 	ft_free2d(pipex->cmd_path);
-	ft_putstr_fd("Command not found", 2);
-	exit(1); //mal,no termina el proceso si no encuentra el comando, el segundo se ejecuta igual
+	return (NULL);
 }
 
 void	ft_free2d(char	**tofree)
