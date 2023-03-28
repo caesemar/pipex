@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_cmd_find.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caesemar <caesemar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 16:32:08 by jocasado          #+#    #+#             */
-/*   Updated: 2023/03/22 19:23:03 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/03/27 15:40:06 by caesemar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*cmd_path_finder(t_pipex *pipex, char *cmd)
 	ft_free2d(pipex->cmd_args);
 	ft_free2d(pipex->cmd_path);
 	ft_putstr_fd("Command not found", 2);
-	exit(1);
+	exit(1); //mal,no termina el proceso si no encuentra el comando, el segundo se ejecuta igual
 }
 
 void	ft_free2d(char	**tofree)
