@@ -6,7 +6,7 @@
 #    By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 03:06:52 by caesemar          #+#    #+#              #
-#    Updated: 2023/03/31 17:55:04 by jocasado         ###   ########.fr        #
+#    Updated: 2023/03/31 19:45:07 by jocasado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,17 +60,23 @@ OBJS = $(CFILES:.c=.o)
 all:        $(NAME)
 
 $(NAME):	$(OBJS)
+			@echo "$(YELLOW)compiling ..."
 			@$(CC) $(OBJS) -o $(NAME) 
-			@echo "$(GREEN)$(NAME) build"
+			@echo "$(GREEN)compiled:$(NAME) build ✅"
 .c.o:
-		${CC} ${CFLAGS} $< -o ${<:.c=.o} -I ${HDRS}
+			@${CC} ${CFLAGS} $< -o ${<:.c=.o} -I ${HDRS}
 
 re:     	fclean all
 
 fclean:     clean
 			@$(RM) $(NAME)
+			@echo "$(YELLOW)deleting...\n$(RED)$(NAME) deleted"
 
 clean:
 			@$(RM) $(OBJS)
+			@echo "$(YELLOW)deleting...\n$(RED)$(OBJS) deleted"
 
+##COLOURS##
 GREEN = \033[1;32m
+YELLOW = \033[1;33m
+RED = \033[1;31m
