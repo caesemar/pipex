@@ -6,20 +6,20 @@
 #    By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 03:06:52 by caesemar          #+#    #+#              #
-#    Updated: 2023/03/31 17:20:35 by jocasado         ###   ########.fr        #
+#    Updated: 2023/03/31 17:55:04 by jocasado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 CFLAGS = -c -Wall -Wextra -Werror
 AR = ar -rcs
-NAME = pipex.a
+NAME = pipex
 RM = rm -rf
 HDRS = pipex.h
 ################################################################################
-##								FILES									      ##
+##								MANDATORY									  ##
 ################################################################################
-CFILES = 
+CFILES = \
 		libft/ft_strlen.c \
 		libft/ft_memset.c \
 		libft/ft_bzero.c \
@@ -60,9 +60,10 @@ OBJS = $(CFILES:.c=.o)
 all:        $(NAME)
 
 $(NAME):	$(OBJS)
-			@$(AR) $(NAME) $(OBJS)
+			@$(CC) $(OBJS) -o $(NAME) 
+			@echo "$(GREEN)$(NAME) build"
 .c.o:
-		${CC} ${CFLAGS} -c $< -o ${<:.c=.o} -I ${HDRS}
+		${CC} ${CFLAGS} $< -o ${<:.c=.o} -I ${HDRS}
 
 re:     	fclean all
 
@@ -71,3 +72,5 @@ fclean:     clean
 
 clean:
 			@$(RM) $(OBJS)
+
+GREEN = \033[1;32m

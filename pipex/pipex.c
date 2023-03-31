@@ -6,7 +6,7 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:44:23 by jocasado          #+#    #+#             */
-/*   Updated: 2023/03/31 14:13:11 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/03/31 18:10:03 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char **argv, char **envp)
 	if (argc != 5)
 		ft_argcerror();
 	if (access(argv[1], R_OK) != 0)
-		ft_error_infile(argv[4]);
+		ft_serror_infile(argv[4]);
 	pipex.fd_out = open (argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (access(argv[4], W_OK) != 0)
 		ft_serror();
@@ -31,14 +31,15 @@ int	main(int argc, char **argv, char **envp)
 	if (pipex.fd_in < 0 || pipex.fd_out < 0)
 		return (-1);
 	pipex.path = comm_path(envp);
+	printf("%s\n",pipex.path);
 	pipex.cmd_args = NULL;
-	pipex.cmd_path = ft_split(pipex.path, ':'); //checkear si falla y liberar
+	pipex.cmd_path = ft_split(pipex.path, ':');
 	if (pipex.cmd_path == NULL)
 		exit (1);
 	pipex.cmd_fpath1 = cmd_found(&pipex, argv[2]);
 	if (pipe(pipex.pipe) < 0)
 		error_on_pipe(&pipex);
-	first_child(&pipex);
+	first_child(&pipex,argv);
 	close(pipex.pipe[0]);
 	close(pipex.pipe[1]);
 	full_free(&pipex);

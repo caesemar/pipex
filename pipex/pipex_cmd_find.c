@@ -6,7 +6,7 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 16:32:08 by jocasado          #+#    #+#             */
-/*   Updated: 2023/03/31 14:41:57 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/03/31 18:08:58 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ char	*comm_path(char	**envp)
 
 char	*cmd_found(t_pipex *pipex, char *cmd)
 {
-	char	*f_path;
-
 	if (cmd[0] == '.' || cmd[0] == '/')
 	{
 		if (access(cmd, X_OK) == 0)
@@ -42,9 +40,11 @@ char	*cmd_path_finder(t_pipex *pipex, char *cmd)
 	if (pipex->cmd_args != NULL)
 		ft_free2d(pipex->cmd_args);
 	pipex->cmd_args = ft_split(cmd, ' ');
+	if (pipex->cmd_args == NULL)
+		return (NULL);
 	while (pipex->cmd_path)
 	{
-		temp = ft_strjoin(pipex->cmd_path, '/');
+		temp = ft_strjoin(*pipex->cmd_path, "/");
 		f_path = ft_strjoin(temp, pipex->cmd_args[0]);
 		free (temp);
 		if (access(f_path, X_OK) == 0)
