@@ -6,12 +6,23 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 23:36:08 by jocasado          #+#    #+#             */
-/*   Updated: 2023/03/22 17:21:53 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/03/31 16:10:54 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
+
+char	**free_split(char **s1, size_t i)
+{
+	size_t	j;
+
+	j = 0;
+	while (j < i)
+		free (s1[j++]);
+	free (s1);
+	return (NULL);
+}
 
 static size_t	count_words(char const *s, char c)
 {
@@ -66,17 +77,17 @@ char	**ft_split(char const *s, char c)
 	j = 0;
 	i = 0;
 	if (!s)
-		return (0);
+		return (NULL);
 	s1 = ft_calloc(count_words(s, c) + 1, sizeof(char *));
 	if (!s1)
-		return (0);
+		return (NULL);
 	while (j < count_words(s, c))
 	{
 		tam = word_len(s, c, &i);
 		k = 0;
 		s1[j] = ft_calloc((tam + 1), sizeof(char));
 		if (!s1[j])
-			return (0);
+			return (free_split(s1, j));
 		while ((tam) > 0)
 			s1[j][k++] = s[i - (tam--)];
 		j++;

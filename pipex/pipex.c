@@ -6,7 +6,7 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:44:23 by jocasado          #+#    #+#             */
-/*   Updated: 2023/03/28 20:45:18 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/03/31 14:13:11 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,16 @@ int	main(int argc, char **argv, char **envp)
 	if (pipex.fd_in < 0 || pipex.fd_out < 0)
 		return (-1);
 	pipex.path = comm_path(envp);
-	pipex.cmd_path = ft_split(pipex.path, ':');
+	pipex.cmd_args = NULL;
+	pipex.cmd_path = ft_split(pipex.path, ':'); //checkear si falla y liberar
+	if (pipex.cmd_path == NULL)
+		exit (1);
 	pipex.cmd_fpath1 = cmd_found(&pipex, argv[2]);
 	if (pipe(pipex.pipe) < 0)
-		ft_serror();
+		error_on_pipe(&pipex);
 	first_child(&pipex);
 	close(pipex.pipe[0]);
 	close(pipex.pipe[1]);
 	full_free(&pipex);
-	return (0);
+	exit(0);
 }

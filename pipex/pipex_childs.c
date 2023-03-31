@@ -6,7 +6,7 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 14:47:43 by caesemar          #+#    #+#             */
-/*   Updated: 2023/03/28 20:45:19 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/03/31 16:12:48 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	first_child(t_pipex *pipex, char *argv[])
 {
 	pipex->pid1 = fork();
 	if (pipex->pid1 < 0)
-		ft_serror();
+		error_on_pipe(&pipex);
 	if (pipex->pid1 == 0)
 	{
 		dup2(pipex->fd_in, STDIN_FILENO);
@@ -35,7 +35,7 @@ void	second_child(t_pipex *pipex, char *argv[])
 	pipex->cmd_fpath2 = cmd_found(&pipex, argv[3]);
 	pipex->pid2 = fork();
 	if (pipex->pid2 < 0)
-		ft_serror();
+		error_on_pipe(&pipex);
 	if (pipex->pid2 == 0)
 	{
 		dup2(pipex->pipe[0], STDIN_FILENO);

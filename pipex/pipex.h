@@ -6,7 +6,7 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:49:45 by jocasado          #+#    #+#             */
-/*   Updated: 2023/03/28 20:45:13 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/03/31 14:15:33 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct s_pipex
 char	*comm_path(char	**envp);
 char	*cmd_path_finder(t_pipex *pipex, char *cmd);
 char	*cmd_found(t_pipex *pipex, char *cmd);
-char	*cmd_trim(char	*cmd);
-void	pipexf(t_pipex pipex, char *comm1, char *comm2);
+void	ft_free2d(char	**tofree);
+void	error_on_pipe(t_pipex *pipex);
+void	full_free(t_pipex *pipex);
+void	first_child(t_pipex *pipex, char *argv[]);
 #endif

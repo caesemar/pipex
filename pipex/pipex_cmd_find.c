@@ -6,7 +6,7 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 16:32:08 by jocasado          #+#    #+#             */
-/*   Updated: 2023/03/28 20:45:15 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/03/31 14:41:57 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*cmd_path_finder(t_pipex *pipex, char *cmd)
 	char	*temp;
 
 	if (pipex->cmd_args != NULL)
-		free (pipex->cmd_args);
+		ft_free2d(pipex->cmd_args);
 	pipex->cmd_args = ft_split(cmd, ' ');
 	while (pipex->cmd_path)
 	{
@@ -59,26 +59,19 @@ char	*cmd_path_finder(t_pipex *pipex, char *cmd)
 
 void	ft_free2d(char	**tofree)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (tofree[i])
-	{	
-		if (tofree[i] != NULL)
-			free (tofree[i++]);
-	}
-	if (tofree != NULL)
-		free (tofree);
+		free (tofree[i++]);
+	free (tofree);
 }
 
 void	full_free(t_pipex *pipex)
 {
 	ft_free2d(pipex->cmd_args);
 	ft_free2d(pipex->cmd_path);
-	if (pipex->pipe != NULL)
-		free (pipex->pipe);
-	if (pipex->cmd_fpath1 != NULL)
-		free (pipex->cmd_fpath1);
-	if (pipex->cmd_fpath2 != NULL)
-		free (pipex->cmd_fpath2);
+	free (pipex->pipe);
+	free (pipex->cmd_fpath1);
+	free (pipex->cmd_fpath2);
 }
