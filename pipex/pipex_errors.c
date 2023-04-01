@@ -6,7 +6,7 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 17:24:40 by jocasado          #+#    #+#             */
-/*   Updated: 2023/03/31 18:11:06 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/04/01 02:57:27 by caesemar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_serror(void)
 
 void	ft_argcerror(void)
 {
-	ft_putstr_fd("Wrong number of arguments, program exited", 2);
+	ft_putstr_fd("Wrong number of arguments, program exited\n", 2);
 	exit (1);
 }
 

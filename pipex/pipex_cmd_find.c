@@ -6,7 +6,7 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 16:32:08 by jocasado          #+#    #+#             */
-/*   Updated: 2023/03/31 18:11:04 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/04/01 02:46:49 by caesemar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	full_free(t_pipex *pipex)
 {
 	ft_free2d(pipex->cmd_args);
 	ft_free2d(pipex->cmd_path);
-	free (pipex->pipe);
+	//free (pipex->pipe);
 	free (pipex->cmd_fpath1);
 	free (pipex->cmd_fpath2);
 }
