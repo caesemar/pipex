@@ -6,7 +6,7 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 17:24:40 by jocasado          #+#    #+#             */
-/*   Updated: 2023/04/01 02:57:27 by caesemar         ###   ########.fr       */
+/*   Updated: 2023/04/02 21:33:55 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_serror_infile(const char *argv)
 	int	tempfd;
 
 	if (access(argv, F_OK) != 0)
-		tempfd = open (argv, O_CREAT| O_RDWR | O_TRUNC, 0644);
+		tempfd = open (argv, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	perror("Input file error");
 	exit (1);
 }
@@ -31,6 +31,14 @@ void	ft_serror(void)
 void	ft_argcerror(void)
 {
 	ft_putstr_fd("Wrong number of arguments, program exited\n", 2);
+	exit (1);
+}
+
+void	ft_execverror(char	*s, t_pipex *pipex)
+{
+	ft_putstr_fd(s, 2);
+	ft_putstr_fd(": command not found \n", 2);
+	full_free(pipex);
 	exit (1);
 }
 

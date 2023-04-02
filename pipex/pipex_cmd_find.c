@@ -6,7 +6,7 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 16:32:08 by jocasado          #+#    #+#             */
-/*   Updated: 2023/04/01 02:46:49 by caesemar         ###   ########.fr       */
+/*   Updated: 2023/04/02 21:30:33 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,24 @@ char	*cmd_path_finder(t_pipex *pipex, char *cmd)
 {
 	char	*f_path;
 	char	*temp;
+	int		i;
 
+	i = 0;
 	if (pipex->cmd_args != NULL)
 		ft_free2d(pipex->cmd_args);
 	pipex->cmd_args = ft_split(cmd, ' ');
 	if (pipex->cmd_args == NULL)
 		return (NULL);
-	while (pipex->cmd_path)
+	while (pipex->cmd_path[i] != NULL)
 	{
-		temp = ft_strjoin(*pipex->cmd_path, "/");
+		temp = ft_strjoin(pipex->cmd_path[i], "/");
 		f_path = ft_strjoin(temp, pipex->cmd_args[0]);
 		free (temp);
 		if (access(f_path, X_OK) == 0)
 			return (f_path);
 		free(f_path);
-		pipex->cmd_path++;
+		i++;
 	}
-	ft_free2d(pipex->cmd_args);
-	ft_free2d(pipex->cmd_path);
 	return (NULL);
 }
 
@@ -71,7 +71,6 @@ void	full_free(t_pipex *pipex)
 {
 	ft_free2d(pipex->cmd_args);
 	ft_free2d(pipex->cmd_path);
-	//free (pipex->pipe);
 	free (pipex->cmd_fpath1);
 	free (pipex->cmd_fpath2);
 }
