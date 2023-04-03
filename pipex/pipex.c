@@ -6,13 +6,11 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:44:23 by jocasado          #+#    #+#             */
-/*   Updated: 2023/04/03 03:04:50 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/04/03 19:28:48 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-//checkear que se tienen los permisos adecuados para ambos fd.
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -20,7 +18,7 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc != 5)
 		ft_argcerror();
-	if (access(argv[1], F_OK | R_OK) != 0)
+	if (access(argv[1], R_OK) != 0)
 		ft_serror_infile(argv[4]);
 	pipex.fd_out = open (argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (access(argv[4], W_OK) != 0)
