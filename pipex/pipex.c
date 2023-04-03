@@ -6,7 +6,7 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:44:23 by jocasado          #+#    #+#             */
-/*   Updated: 2023/04/02 21:18:02 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/04/03 02:21:17 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,14 @@ int	main(int argc, char **argv, char **envp)
 	first_child(&pipex, argv);
 	full_free(&pipex);
 	exit(0);
+}
+
+void	full_free(t_pipex *pipex)
+{
+	ft_free2d(pipex->cmd_args);
+	ft_free2d(pipex->cmd_path);
+	if (pipex->inputype == 1)
+		free (pipex->cmd_fpath1);
+	if (pipex->inputype == 2)
+		free (pipex->cmd_fpath2);
 }

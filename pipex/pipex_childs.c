@@ -6,7 +6,7 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 14:47:43 by caesemar          #+#    #+#             */
-/*   Updated: 2023/04/02 21:17:48 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/04/03 02:24:33 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	first_child(t_pipex *pipex, char *argv[])
 
 void	second_child(t_pipex *pipex, char *argv[])
 {
+	pipex->inputype = 2;
 	pipex->cmd_fpath2 = cmd_found(pipex, argv[3]);
 	close(pipex->pipe[1]);
 	pipex->pid2 = fork();
