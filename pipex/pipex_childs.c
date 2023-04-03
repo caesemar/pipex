@@ -6,7 +6,7 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 14:47:43 by caesemar          #+#    #+#             */
-/*   Updated: 2023/04/03 02:24:33 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/04/03 02:40:41 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,4 @@ void	second_child(t_pipex *pipex, char *argv[])
 	}
 	waitpid(pipex->pid1, NULL, 0);
 	waitpid(pipex->pid2, NULL, 0);
-	close(pipex->pipe[1]);
 }
