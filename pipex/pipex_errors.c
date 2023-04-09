@@ -6,7 +6,7 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 17:24:40 by jocasado          #+#    #+#             */
-/*   Updated: 2023/04/02 21:33:55 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/04/10 01:01:30 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,22 @@ void	ft_argcerror(void)
 
 void	ft_execverror(char	*s, t_pipex *pipex)
 {
-	ft_putstr_fd(s, 2);
-	ft_putstr_fd(": command not found \n", 2);
-	full_free(pipex);
+	ft_putstr_fd(s, STDERR_FILENO);
+	ft_putstr_fd(": command not found \n", STDERR_FILENO);
+	full_free(pipex, 0);
 	exit (1);
 }
 
-void	error_on_pipe(t_pipex *pipex)
+void	error_on_pipe(t_pipex *pipex, int status)
 {
 	ft_free2d(pipex->cmd_path);
 	ft_free2d(pipex->cmd_args);
-	free(pipex->cmd_fpath1);
+	if (status == 1)
+		free(pipex->cmd_fpath1);
+	else
+	{
+		free(pipex->cmd_fpath1);
+		free(pipex->cmd_fpath2);
+	}
 	ft_serror();
 }

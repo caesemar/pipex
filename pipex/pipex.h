@@ -6,7 +6,7 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:49:45 by jocasado          #+#    #+#             */
-/*   Updated: 2023/04/03 02:19:50 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/04/10 00:54:00 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,17 @@ typedef struct s_pipex
 char	*comm_path(char	**envp);
 char	*cmd_path_finder(t_pipex *pipex, char *cmd);
 char	*cmd_found(t_pipex *pipex, char *cmd);
-void	full_free(t_pipex *pipex);
+void	full_free(t_pipex *pipex, int status);
 void	ft_free2d(char	**tofree);
-void	error_on_pipe(t_pipex *pipex);
+void	error_on_pipe(t_pipex *pipex, int status);
 void	first_child(t_pipex *pipex, char *argv[]);
 void	second_child(t_pipex *pipex, char *argv[]);
 void	ft_argcerror(void);
 void	ft_serror(void);
 void	ft_serror_infile(const char *argv);
 void	ft_execverror(char	*s, t_pipex *pipex);
-char	*ft_arg_setup(char *cmd, t_pipex *pipex);
+void	ft_arg_setup(char *cmd, t_pipex *pipex);
+void	ft_argtrim(t_pipex *pipex);
+void	ft_argtrim2(char *temp, size_t *secondf);
+void	ft_execverror1(char	*s, t_pipex *pipex);
 #endif

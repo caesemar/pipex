@@ -6,7 +6,7 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 23:36:08 by jocasado          #+#    #+#             */
-/*   Updated: 2023/04/02 19:09:23 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/04/06 20:18:00 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,30 @@ char	**free_split(char **s1, size_t i)
 	return (NULL);
 }
 
+size_t	inside_comma(char const *s, size_t *index, size_t *comma)
+{
+	if (s[*index] == '\'')
+		*comma = *comma + 1;
+	if (*comma % 2 == 0)
+		return (0);
+	else
+		return (1);
+}
+
 static size_t	count_words(char const *s, char c)
 {
 	size_t	i;
 	size_t	j;
 	size_t	k;
+	size_t	comma;
 
 	i = 0;
 	j = 0;
 	k = 0;
+	comma = 0;
 	while (s[i] != '\0')
 	{
-		while (s[i] != c && s[i] != 0)
+		while (s[i] != 0 && (inside_comma(s, &i, &comma) || s[i] != c))
 		{
 			if (k == 0)
 			{
@@ -54,14 +66,16 @@ static size_t	count_words(char const *s, char c)
 static size_t	word_len(char const *s, char c, size_t *indice)
 {
 	size_t	i;
+	size_t	comma;
 
+	comma = 0;
 	i = 0;
 	while (s[*indice] == c)
 		*indice = *indice + 1;
-	while (s[*indice] != c && s[*indice] != 0)
+	while ((inside_comma(s, indice, &comma) || s[*indice] != c) && s[*indice])
 	{
-		*indice = *indice + 1;
-		i++;
+			*indice = *indice + 1;
+			i++;
 	}
 	return (i);
 }

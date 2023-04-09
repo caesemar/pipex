@@ -6,11 +6,12 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:44:23 by jocasado          #+#    #+#             */
-/*   Updated: 2023/04/03 19:28:48 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/04/10 01:01:18 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include "libft/libft.h"
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -33,18 +34,71 @@ int	main(int argc, char **argv, char **envp)
 	pipex.cmd_args = NULL;
 	pipex.cmd_fpath1 = cmd_found(&pipex, argv[2]);
 	if (pipe(pipex.pipe) < 0)
-		error_on_pipe(&pipex);
+		error_on_pipe(&pipex, 1);
 	first_child(&pipex, argv);
-	full_free(&pipex);
+	full_free(&pipex, 0);
 	exit(0);
 }
 
-void	full_free(t_pipex *pipex)
+void	full_free(t_pipex *pipex, int status)
 {
 	ft_free2d(pipex->cmd_args);
 	ft_free2d(pipex->cmd_path);
-	if (pipex->inputype == 1)
+	if (status == 1 || status == 0)
 		free (pipex->cmd_fpath1);
-	if (pipex->inputype == 2)
+	if (status == 2 || status == 0)
 		free (pipex->cmd_fpath2);
+}
+
+void	ft_argtrim(t_pipex *pipex)
+{
+	int		i;
+	char	*temp;
+	size_t	secondf;
+
+	secondf = 0;
+	i = -1;
+	while (pipex->cmd_args[++i] != NULL)
+	{
+		if (pipex->cmd_args[i][0] == '\'')
+		{
+			temp = ft_strdup(pipex->cmd_args[i]);
+			ft_argtrim2(temp, &secondf);
+			if (secondf % 2 == 0)
+			{
+				free(pipex->cmd_args[i]);
+				pipex->cmd_args[i] = ft_strdup(temp);
+			}
+			free (temp);
+		}
+	}
+}
+
+void	ft_argtrim2(char *temp, size_t *secondf)
+{
+	int	j;
+	int	k;
+
+	j = 0;
+	k = 0;
+	while (temp[j] != 0)
+	{
+		if (temp[j] == '\'')
+		{
+			*secondf = *secondf + 1;
+			j++;
+		}
+		temp[k++] = temp[j];
+		if (temp [j] != 0)
+			j++;
+	}
+	temp[j] = 0;
+}
+
+void	ft_execverror1(char	*s, t_pipex *pipex)
+{
+	ft_putstr_fd(s, STDERR_FILENO);
+	ft_putstr_fd(": command not found \n", STDERR_FILENO);
+	full_free(pipex, 1);
+	exit (1);
 }

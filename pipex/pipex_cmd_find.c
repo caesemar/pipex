@@ -6,10 +6,11 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 16:32:08 by jocasado          #+#    #+#             */
-/*   Updated: 2023/04/03 04:00:23 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/04/10 01:00:22 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/libft.h"
 #include "pipex.h"
 
 char	*comm_path(char	**envp)
@@ -21,12 +22,26 @@ char	*comm_path(char	**envp)
 
 char	*cmd_found(t_pipex *pipex, char *cmd)
 {
+	char	*fpath;
+
 	if (cmd[0] == '.' || cmd[0] == '/')
 	{
-		if (access(cmd, X_OK) == 0)
-			return (ft_arg_setup(cmd, pipex));
+		if (pipex->cmd_args != NULL)
+			ft_free2d(pipex->cmd_args);
+		pipex->cmd_args = ft_split(cmd, ' ');
+		if (pipex->cmd_args == NULL)
+			return (ft_strdup(cmd));
+		fpath = ft_strdup(pipex->cmd_args[0]);
+		if (access(fpath, X_OK) == 0)
+		{
+			ft_arg_setup(cmd, pipex);
+			return (fpath);
+		}
 		else
-			return (NULL);
+		{
+			free(fpath);
+			return (ft_strdup(cmd));
+		}
 	}
 	else
 		return (cmd_path_finder(pipex, cmd));
@@ -43,7 +58,10 @@ char	*cmd_path_finder(t_pipex *pipex, char *cmd)
 		ft_free2d(pipex->cmd_args);
 	pipex->cmd_args = ft_split(cmd, ' ');
 	if (pipex->cmd_args == NULL)
-		return (NULL);
+		return (ft_strdup(cmd));
+	ft_argtrim(pipex);
+	if (pipex->cmd_args == NULL)
+		return (cmd);
 	while (pipex->cmd_path[i] != NULL)
 	{
 		temp = ft_strjoin(pipex->cmd_path[i++], "/");
@@ -53,7 +71,7 @@ char	*cmd_path_finder(t_pipex *pipex, char *cmd)
 			return (f_path);
 		free(f_path);
 	}
-	return (NULL);
+	return (ft_strdup(cmd));
 }
 
 void	ft_free2d(char	**tofree)
@@ -66,27 +84,21 @@ void	ft_free2d(char	**tofree)
 	free (tofree);
 }
 
-char	*ft_arg_setup(char *cmd, t_pipex *pipex)
+void	ft_arg_setup(char *cmd, t_pipex *pipex)
 {
 	int		i;
 	char	*temp;
 
 	i = 0;
-	if (pipex->inputype != 3)
-		pipex->inputype = 1;
-	else
-		pipex->inputype = 2;
 	if (pipex->cmd_args != NULL)
 		ft_free2d(pipex->cmd_args);
 	pipex->cmd_args = ft_split(cmd, '/');
 	if (pipex->cmd_args == NULL)
-		return (NULL);
+		return ;
 	while (pipex->cmd_args[i])
 		i++;
 	temp = ft_strdup(pipex->cmd_args[i - 1]);
 	ft_free2d(pipex->cmd_args);
-	pipex->cmd_args = ft_calloc(2, sizeof(char *));
-	pipex->cmd_args[0] = ft_strdup(temp);
+	pipex->cmd_args = ft_split(temp, ' ');
 	free(temp);
-	return (cmd);
 }
