@@ -6,7 +6,7 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:49:45 by jocasado          #+#    #+#             */
-/*   Updated: 2023/04/10 14:21:46 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/04/10 15:16:44 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct s_pipex
 	pid_t	pid2;
 	int		fd_in;
 	int		fd_out;
-	int		inputype;
 	int		pipe[2];
 	char	*path;
 	char	**cmd_path;
