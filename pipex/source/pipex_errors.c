@@ -6,19 +6,19 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 17:24:40 by jocasado          #+#    #+#             */
-/*   Updated: 2023/04/10 03:14:54 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/04/10 14:21:38 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-void	ft_serror_infile(const char *argv)
+void	ft_serror_infile(char **argv)
 {
-	if (access(argv, F_OK) != 0)
-		open (argv, O_CREAT | O_RDWR | O_TRUNC, 0644);
-	else if (access(argv, W_OK) == 0)
-		unlink(argv);
-	perror("Input file error");
+	if (access(argv[4], F_OK) != 0)
+		open (argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
+	else if (access(argv[4], W_OK) == 0)
+		open(argv[4], O_TRUNC);
+	perror(argv[1]);
 	exit (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:44:23 by jocasado          #+#    #+#             */
-/*   Updated: 2023/04/10 03:13:32 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/04/10 14:19:57 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv, char **envp)
 	if (argc != 5)
 		ft_argcerror();
 	if (access(argv[1], R_OK) != 0)
-		ft_serror_infile(argv[4]);
+		ft_serror_infile(argv);
 	pipex.fd_out = open (argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (access(argv[4], W_OK) != 0)
 		ft_serror();

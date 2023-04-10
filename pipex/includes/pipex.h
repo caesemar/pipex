@@ -6,7 +6,7 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:49:45 by jocasado          #+#    #+#             */
-/*   Updated: 2023/04/10 02:58:40 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/04/10 14:21:46 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	first_child(t_pipex *pipex, char *argv[]);
 void	second_child(t_pipex *pipex, char *argv[]);
 void	ft_argcerror(void);
 void	ft_serror(void);
-void	ft_serror_infile(const char *argv);
+void	ft_serror_infile(char **argv);
 void	ft_execverror(char	*s, t_pipex *pipex);
 void	ft_arg_setup(char *cmd, t_pipex *pipex);
 void	ft_argtrim(t_pipex *pipex);
