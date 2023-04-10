@@ -6,7 +6,7 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 17:24:40 by jocasado          #+#    #+#             */
-/*   Updated: 2023/04/10 14:21:38 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/04/10 20:49:31 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	ft_serror_infile(char **argv)
 	else if (access(argv[4], W_OK) == 0)
 		open(argv[4], O_TRUNC);
 	perror(argv[1]);
-	exit (1);
 }
 
 void	ft_serror(void)

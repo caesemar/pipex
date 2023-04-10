@@ -6,7 +6,7 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:44:23 by jocasado          #+#    #+#             */
-/*   Updated: 2023/04/10 14:19:57 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/04/10 20:31:01 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	main(int argc, char **argv, char **envp)
 	if (access(argv[4], W_OK) != 0)
 		ft_serror();
 	pipex.fd_in = open (argv[1], O_RDONLY);
-	if (pipex.fd_in < 0 || pipex.fd_out < 0)
-		ft_serror();
+	if (pipex.fd_out < 0)
+		perror("invalid fd: ");
 	pipex.path = comm_path(envp);
 	pipex.cmd_path = ft_split(pipex.path, ':');
 	if (pipex.cmd_path == NULL)
