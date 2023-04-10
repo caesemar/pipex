@@ -6,7 +6,7 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 14:47:43 by caesemar          #+#    #+#             */
-/*   Updated: 2023/04/10 20:47:21 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/04/10 21:33:15 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	first_child(t_pipex *pipex, char *argv[])
 		}
 		else
 		{
+			full_free(pipex, 1);
 			close(pipex->pipe[0]);
 			close(pipex->pipe[1]);
 			exit(1);
@@ -56,6 +57,7 @@ void	second_child(t_pipex *pipex, char *argv[])
 			execve(pipex->cmd_fpath2, pipex->cmd_args, NULL);
 			ft_execverror(pipex->cmd_args[0], pipex);
 		}
+		full_free(pipex, 0);
 		exit(1);
 	}
 	waitpid(pipex->pid1, NULL, 0);
