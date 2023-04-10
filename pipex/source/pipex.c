@@ -6,12 +6,11 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:44:23 by jocasado          #+#    #+#             */
-/*   Updated: 2023/04/10 01:01:18 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/04/10 03:13:32 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
-#include "libft/libft.h"
+#include "../includes/pipex.h"
 
 int	main(int argc, char **argv, char **envp)
 {

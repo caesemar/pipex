@@ -6,11 +6,11 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 14:47:43 by caesemar          #+#    #+#             */
-/*   Updated: 2023/04/10 00:56:39 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/04/10 03:14:17 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../includes/pipex.h"
 
 void	first_child(t_pipex *pipex, char *argv[])
 {

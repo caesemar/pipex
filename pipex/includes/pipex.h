@@ -6,7 +6,7 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:49:45 by jocasado          #+#    #+#             */
-/*   Updated: 2023/04/10 00:54:00 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/04/10 02:58:40 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <errno.h>
-# include "libft/libft.h"
+# include "../libft/libft.h"
 
 typedef struct s_pipex
 {

@@ -6,15 +6,15 @@
 #    By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 03:06:52 by caesemar          #+#    #+#              #
-#    Updated: 2023/04/01 02:48:26 by caesemar         ###   ########.fr        #
+#    Updated: 2023/04/10 03:10:17 by jocasado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
-CFLAGS = -c -Wall -Wextra
+CFLAGS = -c -Wall -Wextra -Werror
 NAME = pipex
 RM = rm -rf
-HDRS = -I pipex.h
+HDRS = -I ./includes/
 ################################################################################
 ##								MANDATORY									  ##
 ################################################################################
@@ -30,10 +30,10 @@ CFILES = \
 		libft/ft_split.c \
 		libft/ft_putchar_fd.c \
 		libft/ft_putstr_fd.c \
-		pipex.c\
-		pipex_cmd_find.c\
-		pipex_errors.c\
-		pipex_childs.c
+		source/pipex.c\
+		source/pipex_cmd_find.c\
+		source/pipex_errors.c\
+		source/pipex_childs.c
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
 OBJS = $(CFILES:.c=.o)
 ################################################################################

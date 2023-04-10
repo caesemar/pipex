@@ -6,18 +6,16 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 17:24:40 by jocasado          #+#    #+#             */
-/*   Updated: 2023/04/10 02:46:06 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/04/10 03:14:54 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../includes/pipex.h"
 
 void	ft_serror_infile(const char *argv)
 {
-	int	tempfd;
-
 	if (access(argv, F_OK) != 0)
-		tempfd = open (argv, O_CREAT | O_RDWR | O_TRUNC, 0644);
+		open (argv, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	else if (access(argv, W_OK) == 0)
 		unlink(argv);
 	perror("Input file error");

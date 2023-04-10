@@ -6,12 +6,11 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 16:32:08 by jocasado          #+#    #+#             */
-/*   Updated: 2023/04/10 01:00:22 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/04/10 03:14:43 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-#include "pipex.h"
+#include "../includes/pipex.h"
 
 char	*comm_path(char	**envp)
 {
