@@ -6,7 +6,7 @@
 #    By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 03:06:52 by caesemar          #+#    #+#              #
-#    Updated: 2023/04/11 16:02:23 by jocasado         ###   ########.fr        #
+#    Updated: 2023/04/11 17:07:57 by jocasado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,17 +37,17 @@ CFILES = \
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
 OBJS = $(CFILES:.c=.o)
 ################################################################################
-.PHONY: all re fclean clean
+.PHONY: all re fclean clean tests
 ################################################################################
 
 all:        $(NAME)
 
 $(NAME):	$(OBJS)
 			@echo "$(YELLOW)compiling ..."
-			@$(CC) $(OBJS) -o $(NAME) 
+			@$(CC) $(OBJS) -o  $(NAME)
 			@echo "$(GREEN)compiled:$(NAME) build ✅"
 .c.o:
-			@${CC} -c ${CFLAGS} $^ -o $@ ${HDRS}
+			@${CC} ${CFLAGS} $^ -o $@ ${HDRS}
 
 re:     	fclean all
 
@@ -111,6 +111,7 @@ GREEN = \033[1;32m
 YELLOW = \033[1;33m
 RED = \033[1;31m
 DEFAULT = \033[0m
+
 ##COMMANDS##
 COMMAND1 = "grep /"
 COMMAND2 = "wc -l"

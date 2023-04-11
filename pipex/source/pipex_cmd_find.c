@@ -6,7 +6,7 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 16:32:08 by jocasado          #+#    #+#             */
-/*   Updated: 2023/04/10 03:14:43 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/04/11 16:56:13 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ char	*cmd_found(t_pipex *pipex, char *cmd)
 {
 	char	*fpath;
 
-	if (cmd[0] == '.' || cmd[0] == '/')
+	if (ft_strncmp(cmd, "./", 2) == 0 || cmd[0] == '/' || \
+	ft_strncmp(cmd, "../", 3) == 0)
 	{
 		if (pipex->cmd_args != NULL)
 			ft_free2d(pipex->cmd_args);

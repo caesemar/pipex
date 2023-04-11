@@ -6,7 +6,7 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:44:23 by jocasado          #+#    #+#             */
-/*   Updated: 2023/04/10 20:31:01 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/04/11 17:10:05 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int	main(int argc, char **argv, char **envp)
 		ft_argcerror();
 	if (access(argv[1], R_OK) != 0)
 		ft_serror_infile(argv);
-	pipex.fd_out = open (argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
+	pipex.fd_out = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (access(argv[4], W_OK) != 0)
 		ft_serror();
-	pipex.fd_in = open (argv[1], O_RDONLY);
+	pipex.fd_in = open(argv[1], O_RDONLY);
 	if (pipex.fd_out < 0)
 		perror("invalid fd: ");
 	pipex.path = comm_path(envp);
@@ -36,7 +36,7 @@ int	main(int argc, char **argv, char **envp)
 		error_on_pipe(&pipex, 1);
 	first_child(&pipex, argv);
 	full_free(&pipex, 0);
-	exit(0);
+	exit (0);
 }
 
 void	full_free(t_pipex *pipex, int status)
@@ -44,9 +44,9 @@ void	full_free(t_pipex *pipex, int status)
 	ft_free2d(pipex->cmd_args);
 	ft_free2d(pipex->cmd_path);
 	if (status == 1 || status == 0)
-		free (pipex->cmd_fpath1);
+		free(pipex->cmd_fpath1);
 	if (status == 2 || status == 0)
-		free (pipex->cmd_fpath2);
+		free(pipex->cmd_fpath2);
 }
 
 void	ft_argtrim(t_pipex *pipex)
