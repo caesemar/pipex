@@ -6,7 +6,7 @@
 #    By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 03:06:52 by caesemar          #+#    #+#              #
-#    Updated: 2023/04/10 03:10:17 by jocasado         ###   ########.fr        #
+#    Updated: 2023/04/11 16:02:23 by jocasado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,66 @@ clean:
 			@$(RM) $(OBJS)
 			@echo "$(YELLOW)deleting...\n$(RED)$(OBJS) deleted"
 
+tests: test1 test2 test3 test4 test5
+		@echo "$(GREEN)tests done ✅ $(DEFAULT)"
+
+test1:
+			@echo "creating a.txt @df > a.txt" 
+			@df > a.txt
+			@echo "$(YELLOW)executing (non error) tests...\n$(DEFAULT)"
+			@echo "$(GREEN)##TEST 1##$(DEFAULT)"
+			@echo "./$(NAME) a.txt $(COMMAND1) $(COMMAND2) b.txt: \n"
+			@./$(NAME) a.txt $(COMMAND1) $(COMMAND2) b.txt
+			@echo "< a.txt $(COMMAND_1) | $(COMMAND_2)  > c.txt:\n"
+			@ < a.txt $(COMMAND_1) | $(COMMAND_2)  > c.txt
+			@echo "diff b.txt c.txt"
+			@diff b.txt c.txt
+test2:
+			@echo "$(GREEN)##TEST 2##$(DEFAULT)"
+			@echo "input pipex :./$(NAME) a.txt $(COMMAND1) $(COMMAND3) b.txt: \n"
+			@./$(NAME) a.txt $(COMMAND1) $(COMMAND3) b.txt
+			@echo "input bash: < a.txt $(COMMAND_1) | $(COMMAND_3)  > c.txt:\n"
+			@ < a.txt $(COMMAND_1) | $(COMMAND_3)  > c.txt
+			@echo "diff b.txt c.txt"
+			@diff b.txt c.txt
+test3:
+			@echo "$(GREEN)##TEST 3##$(DEFAULT)"
+			@echo "input pipex :./$(NAME) a.txt $(COMMAND1) $(COMMAND4) b.txt: \n"
+			@./$(NAME) a.txt $(COMMAND1) $(COMMAND4) b.txt
+			@echo "input bash: < a.txt $(COMMAND_1) | $(COMMAND_4)  > c.txt:\n"
+			@ < a.txt $(COMMAND_1) | $(COMMAND_4)  > c.txt
+			@echo "diff b.txt c.txt"
+			@diff b.txt c.txt
+test4:
+			@echo "$(GREEN)##TEST 4##$(DEFAULT)"
+			@echo "input pipex :./$(NAME) a.txt $(COMMAND5) $(COMMAND5) b.txt: \n"
+			@./$(NAME) a.txt $(COMMAND5) $(COMMAND5) b.txt
+			@echo "input bash: < a.txt $(COMMAND_5) | $(COMMAND_5)  > c.txt:\n"
+			@ < a.txt $(COMMAND_5) | $(COMMAND_5)  > c.txt
+			@echo "diff b.txt c.txt"
+			@diff b.txt c.txt
+test5:
+			@echo "$(GREEN)##TEST 5##$(DEFAULT)"
+			@echo "input pipex :./$(NAME) a.txt $(COMMAND4) $(COMMAND5) b.txt: \n"
+			@./$(NAME) a.txt $(COMMAND4) $(COMMAND5) b.txt
+			@echo "input bash: < a.txt $(COMMAND_4) | $(COMMAND_5)  > c.txt:\n"
+			@ < a.txt $(COMMAND_4) | $(COMMAND_5)  > c.txt
+			@echo "diff b.txt c.txt"
+			@diff b.txt c.txt
+
 ##COLOURS##
 GREEN = \033[1;32m
 YELLOW = \033[1;33m
 RED = \033[1;31m
+DEFAULT = \033[0m
+##COMMANDS##
+COMMAND1 = "grep /"
+COMMAND2 = "wc -l"
+COMMAND_1 = grep /
+COMMAND_2 = wc -l
+COMMAND3 = "/usr/bin/wc -l"
+COMMAND_3 = /usr/bin/wc -l
+COMMAND4 = "awk '/^\// {print}'"
+COMMAND_4 = awk '/^\// {print}'
+COMMAND5 = "cat"
+COMMAND_5 = cat
