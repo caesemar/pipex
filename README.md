@@ -14,7 +14,7 @@ and the input must be entered in the following way:
 For the command part of the input you can receive either a standard command i.e. "ls" or the relative/absolute route i.e. (./.. , /usr/bin/ls, ../...),  the error handling as well has to be very bash-like so I made it quite similar.
 Also, your program has to be able to execute and handle the lack of environment variables (compilation with env -i).
 
-For extra, I implemented single quote support (') so awk commands could be functionals, not the case with $x since its on bash to handle them properly, which doesnt happen.
+Aditionally, I implemented single quote support (') so awk commands could be functionals, not the case with $x since it´s on bash to handle them properly.
 
 
 
