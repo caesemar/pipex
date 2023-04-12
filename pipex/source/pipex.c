@@ -6,7 +6,7 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:44:23 by jocasado          #+#    #+#             */
-/*   Updated: 2023/04/11 17:10:05 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/04/12 01:55:43 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ int	main(int argc, char **argv, char **envp)
 		perror("invalid fd: ");
 	pipex.path = comm_path(envp);
 	pipex.cmd_path = ft_split(pipex.path, ':');
-	if (pipex.cmd_path == NULL)
-		exit (1);
 	pipex.cmd_args = NULL;
 	pipex.cmd_fpath1 = cmd_found(&pipex, argv[2]);
 	if (pipe(pipex.pipe) < 0)
@@ -40,9 +38,11 @@ int	main(int argc, char **argv, char **envp)
 }
 
 void	full_free(t_pipex *pipex, int status)
-{
-	ft_free2d(pipex->cmd_args);
-	ft_free2d(pipex->cmd_path);
+{	
+	if (pipex->cmd_args != NULL)
+		ft_free2d(pipex->cmd_args);
+	if (pipex->cmd_path != NULL)
+		ft_free2d(pipex->cmd_path);
 	if (status == 1 || status == 0)
 		free(pipex->cmd_fpath1);
 	if (status == 2 || status == 0)

@@ -6,7 +6,7 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 16:32:08 by jocasado          #+#    #+#             */
-/*   Updated: 2023/04/11 16:56:13 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/04/12 01:39:40 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 char	*comm_path(char	**envp)
 {
-	while (ft_strncmp("PATH=", *envp, 5))
+	while (*envp && ft_strncmp("PATH=", *envp, 5))
 		envp++;
-	return (*envp + 5);
+	if (*envp)
+		return (*envp + 5);
+	return (NULL);
 }
 
 char	*cmd_found(t_pipex *pipex, char *cmd)
@@ -60,17 +62,18 @@ char	*cmd_path_finder(t_pipex *pipex, char *cmd)
 	if (pipex->cmd_args == NULL)
 		return (ft_strdup(cmd));
 	ft_argtrim(pipex);
-	if (pipex->cmd_args == NULL)
-		return (cmd);
-	while (pipex->cmd_path[i] != NULL)
+	if (pipex->cmd_path != NULL)
 	{
-		temp = ft_strjoin(pipex->cmd_path[i++], "/");
-		f_path = ft_strjoin(temp, pipex->cmd_args[0]);
-		free (temp);
-		if (access(f_path, X_OK) == 0)
-			return (f_path);
-		free(f_path);
-	}
+		while (pipex->cmd_path[i] != NULL)
+		{
+			temp = ft_strjoin(pipex->cmd_path[i++], "/");
+			f_path = ft_strjoin(temp, pipex->cmd_args[0]);
+			free (temp);
+			if (access(f_path, X_OK) == 0)
+				return (f_path);
+			free(f_path);
+		}
+}
 	return (ft_strdup(cmd));
 }
 
