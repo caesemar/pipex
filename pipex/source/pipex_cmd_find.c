@@ -6,7 +6,7 @@
 /*   By: jocasado <jocasado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 16:32:08 by jocasado          #+#    #+#             */
-/*   Updated: 2023/04/12 01:39:40 by jocasado         ###   ########.fr       */
+/*   Updated: 2023/04/12 02:02:49 by jocasado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char	*cmd_path_finder(t_pipex *pipex, char *cmd)
 				return (f_path);
 			free(f_path);
 		}
-}
+	}
 	return (ft_strdup(cmd));
 }
 
