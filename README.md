@@ -16,6 +16,8 @@ Also, your program has to be able to execute and handle the lack of environment 
 
 Aditionally, I implemented single quote support (') so awk commands could be functionals, not the case with $x since it´s on bash to handle them properly.
 
+On the makefile some tests are implemented, only for success cases, error cases have to be manually checked. You can check this tests by using:
 
+                                                                  make tests
 
 # <p align="center"> ![pipe](https://user-images.githubusercontent.com/47799144/231563677-b84a535e-39ee-4e15-8058-87191f427fe1.png)</p>
